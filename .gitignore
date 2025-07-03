@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+
+venv/
+__pycache__/
+
+*.pdf
+pyenv.cfg
+pyvenv.cfg
+generated/
