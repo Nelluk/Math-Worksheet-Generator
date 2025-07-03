@@ -2,7 +2,10 @@
 
 A modern, web-based Python app for generating customizable math worksheet PDFs. Supports multiple problem types, per-type term ranges, and a user-friendly web UI. Built with FastAPI and ReportLab. Originally forked from [https://github.com/januschung/math-worksheet-generator/](https://github.com/januschung/math-worksheet-generator/)
 
+Demo site: [https://math-worksheet-generator-xse1.onrender.com](https://math-worksheet-generator-xse1.onrender.com)
+
 ![image](https://github.com/user-attachments/assets/e6a245e4-0628-4217-bbbb-2fd76a7868ef)
+
 
 
 ## Features
