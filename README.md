@@ -1,8 +1,8 @@
 # Math Worksheet Generator (Web Edition)
 
-A modern, web-based Python app for generating customizable math worksheet PDFs. Supports multiple problem types, per-type term ranges, and a user-friendly web UI. Built with FastAPI and ReportLab.
+A modern, web-based Python app for generating customizable math worksheet PDFs. Supports multiple problem types, per-type term ranges, and a user-friendly web UI. Built with FastAPI and ReportLab. Originally forked from [https://github.com/januschung/math-worksheet-generator/](https://github.com/januschung/math-worksheet-generator/)
 
-![image](https://github.com/user-attachments/assets/c9c88a51-d33e-44d4-ada1-e24f7aaa23e6)
+![image](https://github.com/user-attachments/assets/e6a245e4-0628-4217-bbbb-2fd76a7868ef)
 
 
 ## Features
