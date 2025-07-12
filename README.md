@@ -15,6 +15,7 @@ Demo site: [https://math-worksheet-generator-xse1.onrender.com](https://math-wor
 - Modern, interactive web UI (no CLI required)
 - REST API for programmatic access
 - Inline PDF preview and download
+- Bookmarkable URLs to recall specific configurations
 
 ## Requirements
 - Python 3.8+
@@ -47,6 +48,7 @@ Demo site: [https://math-worksheet-generator-xse1.onrender.com](https://math-wor
 - Set the number of problems per type.
 - Choose how many problems appear in each section (defaults to 25).
 - Click **Generate** to preview and download the worksheet PDF.
+- After generating, the URL updates so you can bookmark or share the settings.
 
 ## API Endpoints
 ### `POST /generate`
