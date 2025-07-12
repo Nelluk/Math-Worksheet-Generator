@@ -258,6 +258,7 @@ async def index():
   const frame = document.getElementById('preview');
   const defaults = await fetch('/defaults').then(r => r.json());
   const types = Object.keys(defaults);
+  const qs = new URLSearchParams(location.search);
 
   function parseRange(txt){
     const [a,b] = txt.split('..').map(Number);
@@ -296,6 +297,7 @@ async def index():
     missingfactor: 'term1 \u00d7 term2 with one blank',
     fractioncompare: 'compare fractions; denominators from term1 and term2'
   };
+  const updates = {};
   for(const t of types){
     const t1 = document.getElementById(`${t}_term1`);
     const t2 = document.getElementById(`${t}_term2`);
@@ -332,6 +334,7 @@ async def index():
     t1.addEventListener('input', update);
     t2.addEventListener('input', update);
     update();
+    updates[t] = update;
     // Enable/disable term fields based on checkbox
     const cb = document.querySelector(`input[name='ptype'][value='${t}']`);
     cb.addEventListener('change', () => {
@@ -343,6 +346,29 @@ async def index():
       }
     });
   }
+
+  function applyQueryParams(){
+    if(qs.has('n')) document.getElementById('n').value = qs.get('n');
+    if(qs.has('chunk')) document.getElementById('chunk').value = qs.get('chunk');
+    const list = qs.get('types');
+    if(list){
+      list.split(',').forEach(t => {
+        const cb = document.querySelector(`input[name='ptype'][value='${t}']`);
+        if(cb){
+          cb.checked = true;
+          cb.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+    for(const t of types){
+      const p1 = qs.get(`${t}_term1`);
+      const p2 = qs.get(`${t}_term2`);
+      if(p1) document.getElementById(`${t}_term1`).value = p1;
+      if(p2) document.getElementById(`${t}_term2`).value = p2;
+      if((p1 || p2) && updates[t]) updates[t]();
+    }
+  }
+  applyQueryParams();
 
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
@@ -367,6 +393,17 @@ async def index():
     }
     const payload = {problem_types, n, chunk};
     if(Object.keys(defaultsPayload).length) payload.defaults = defaultsPayload;
+    const params = new URLSearchParams();
+    params.set('types', problem_types.join(','));
+    params.set('n', n);
+    params.set('chunk', chunk);
+    for(const t of problem_types){
+      const t1 = document.getElementById(`${t}_term1`).value.trim();
+      const t2 = document.getElementById(`${t}_term2`).value.trim();
+      params.set(`${t}_term1`, t1);
+      params.set(`${t}_term2`, t2);
+    }
+    history.replaceState(null, '', '?'+params.toString());
     try{
       const res = await fetch('/generate', {
         method:'POST',
